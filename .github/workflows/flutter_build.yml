@@ -48,14 +48,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Build Linux
+        run: flutter build linux --release
+
       - name: Verify Linux build output
         run: ls -la build/linux/x64/release/bundle/
 
       - name: Archive Linux build
         run: zip -r linux-build.zip build/linux/x64/release/bundle/
-
-      - name: Build Linux
-        run: flutter build linux --release
 
       - name: Upload Linux build artifacts
         uses: actions/upload-artifact@v3
