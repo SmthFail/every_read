@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: linux-build
-          path: build/linux/x64/release/bundle/
+          path: linux-build.zip
 
   build-windows:
     name: Build Windows
@@ -125,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: windows-build
-          path: build/windows/runner/Release/
+          path: windows-build.zip
 
   build-android:
     name: Build Android
