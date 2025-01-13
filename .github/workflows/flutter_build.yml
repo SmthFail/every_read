@@ -5,6 +5,9 @@ on:
     tags:
       - 'develop-*'
 
+permissions:
+  contents: write
+
 jobs:
   build-linux:
     name: Build Linux
@@ -44,6 +47,12 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Verify Linux build output
+        run: ls -la build/linux/x64/release/bundle/
+
+      - name: Archive Linux build
+        run: zip -r linux-build.zip build/linux/x64/release/bundle/
 
       - name: Build Linux
         run: flutter build linux --release
@@ -90,6 +99,9 @@ jobs:
 
       - name: Build Windows
         run: flutter build windows --release
+
+      - name: Archive Windows build
+        run: Compress-Archive -Path build/windows/runner/Release/* -DestinationPath windows-build.zip
 
       - name: Upload Windows build artifacts
         uses: actions/upload-artifact@v3
@@ -186,7 +198,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
           release_name: Release ${{ env.VERSION }}
           body: "Release of version ${{ env.VERSION }}"
           draft: false
