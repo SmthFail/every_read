@@ -102,15 +102,15 @@ jobs:
 
       - name: Verify Windows build output
         run: |
-          if (Test-Path "build/windows/runner/Release/") {
-            Get-ChildItem -Path "build/windows/runner/Release/" -Recurse
+          if (Test-Path "build/windows/x64/runner/Release/") {
+            Get-ChildItem -Path "build/windows/x64/runner/Release/" -Recurse
           } else {
             Write-Host "Build output directory does not exist."
             Exit 1
           }
 
       - name: Archive Windows build
-        run: Compress-Archive -Path build/windows/runner/Release/* -DestinationPath windows-build.zip
+        run: Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath windows-build.zip
 
       - name: Verify Windows build archive
         run: |
@@ -197,7 +197,7 @@ jobs:
   create-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
-    needs: [build-linux, build-android]
+    needs: [build-linux, build-windows, build-android]
     if: startsWith(github.ref, 'refs/tags/develop-')
 
     steps:
