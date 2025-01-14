@@ -230,6 +230,7 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           name: Release ${{ env.VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           body: "Release of version ${{ env.VERSION }}"
           allowUpdates: true
           replaceArtifacts: false
