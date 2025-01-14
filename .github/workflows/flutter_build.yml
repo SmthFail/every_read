@@ -233,8 +233,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: "Release of version ${{ env.VERSION }}"
           allowUpdates: true
-          replaceArtifacts: false
-          files: |
+          replacesArtifacts: false
+          artifacts: |
             ./linux-build/linux-build.zip
             ./windows-build/windows-build.zip
             ./android-build/app-release.apk
