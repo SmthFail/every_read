@@ -231,6 +231,8 @@ jobs:
           tag: ${{ github.ref_name }}
           name: Release ${{ env.VERSION }}
           body: "Release of version ${{ env.VERSION }}"
+          allowUpdates: true
+          replaceArtifacts: false
           files: |
             ./linux-build/linux-build.zip
             ./windows-build/windows-build.zip
